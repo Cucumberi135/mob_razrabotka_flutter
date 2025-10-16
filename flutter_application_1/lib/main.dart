@@ -62,8 +62,8 @@ class ExamplePage extends StatelessWidget {
 
                 const CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage(
-                    'https://i.pravatar.cc/150?img=10',
+                  backgroundImage: AssetImage(
+                    'assets/photo_2025-04-08_12-43-44.jpg',
                   ),
                 ),
               ],
