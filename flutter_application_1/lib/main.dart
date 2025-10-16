@@ -1,90 +1,154 @@
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Supabase.initialize(
-    url: 'https://vzwbfcndlanfgyxcdmjv.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6d2JmY25kbGFuZmd5eGNkbWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA0NjU4MDYsImV4cCI6MjA3NjA0MTgwNn0.ouWwcALKAB3qBksqoLdDfsJcMUc7t_tIorDvbfkGrsk',
-  );
+void main() => runApp(const AirlineApp());
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AirlineApp extends StatelessWidget {
+  const AirlineApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Supabase Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Supabase Flutter Demo'),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AirlineHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    testSupabase(); // ✅ теперь метод в правильном месте (внутри State)
-  }
-
-  // Проверка соединения с Supabase
-  Future<void> testSupabase() async {
-    try {
-      final res =
-          await Supabase.instance.client.from('todos').select().limit(1);
-      print('Соединение работает ✅: $res');
-    } catch (e) {
-      print('Ошибка соединения ❌: $e');
-    }
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+class AirlineHomePage extends StatelessWidget {
+  const AirlineHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text("Airlines"),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('Ты нажал кнопку столько раз:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            color: Colors.blueAccent.withValues(alpha: 0.1),
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CircleAvatar(
+                  radius: 35,
+                  backgroundImage: NetworkImage(
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa8rPTh1qXRZ0iB39FAxIXbMMgmEbgpu6Q-Q&s',
+                  ),
+                ),
+                const Text(
+                  'Добро пожаловать в SkyFly ✈️',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              color: Colors.white,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Популярные направления",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 12),
+
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _destinationCard(
+                        "Париж",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMS9tkui0dIJVBfQsJU7A5AY386VGWdYyvSQ&s",
+                      ),
+                      _destinationCard(
+                        "Токио",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSbV4bPVYbh0sSmr7RVJ_KBeBSgDoeIL_LPw&s",
+                      ),
+                      _destinationCard(
+                        "Нью-Йорк",
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_xip3rGNvNMoZqj1eP0_VuHMBpumVgaQWug&s",
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent.withValues(alpha: 0.05),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Почему выбирают нас:",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text("• Современные самолёты 🛫"),
+                        Text("• Удобное онлайн-бронирование 📱"),
+                        Text("• Программа лояльности SkyBonus 💎"),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
+
+     
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Увеличить',
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.blueAccent,
+        onPressed: () {
+          print("123");
+        },
+        child: const Icon(Icons.search),
+      ),
+    );
+  }
+
+  Widget _destinationCard(String city, String imageUrl) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        height: 120,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          image: DecorationImage(
+            image: NetworkImage(imageUrl),
+            fit: BoxFit.cover,
+          ),
+        ),
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          padding: const EdgeInsets.all(6),
+          color: Colors.black.withValues(alpha: 0.5),
+          child: Text(
+            city,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
       ),
     );
   }
