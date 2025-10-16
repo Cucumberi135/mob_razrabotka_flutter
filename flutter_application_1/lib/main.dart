@@ -1,154 +1,74 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const AirlineApp());
+void main() => runApp(const MyApp());
 
-class AirlineApp extends StatelessWidget {
-  const AirlineApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AirlineHomePage(),
+      home: ExamplePage(),
     );
   }
 }
 
-class AirlineHomePage extends StatelessWidget {
-  const AirlineHomePage({super.key});
-
+class ExamplePage extends StatelessWidget {
+  const ExamplePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Airlines"),
-        centerTitle: true,
-        backgroundColor: Colors.blueAccent,
-      ),
-      body: Column(
-        children: [
-          Container(
-            width: double.infinity,
-            color: Colors.blueAccent.withValues(alpha: 0.1),
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const CircleAvatar(
-                  radius: 35,
-                  backgroundImage: NetworkImage(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa8rPTh1qXRZ0iB39FAxIXbMMgmEbgpu6Q-Q&s',
+                Container(width: 80, height: 80, color: Colors.blueAccent),
+
+                Expanded(
+                  child: Container(
+                    height: 80,
+                    color: Colors.green.withValues(alpha: 0.7),
+                    child: const Center(
+                      child: Text(
+                        'Expanded Container',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
-                const Text(
-                  'Добро пожаловать в SkyFly ✈️',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(
+                    'https://i.pravatar.cc/150?img=10',
+                  ),
                 ),
               ],
             ),
-          ),
+            const SizedBox(height: 20),
 
-          Expanded(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              color: Colors.white,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Популярные направления",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 12),
-
-                  
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _destinationCard(
-                        "Париж",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMS9tkui0dIJVBfQsJU7A5AY386VGWdYyvSQ&s",
-                      ),
-                      _destinationCard(
-                        "Токио",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSbV4bPVYbh0sSmr7RVJ_KBeBSgDoeIL_LPw&s",
-                      ),
-                      _destinationCard(
-                        "Нью-Йорк",
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_xip3rGNvNMoZqj1eP0_VuHMBpumVgaQWug&s",
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  
-                  Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.blueAccent.withValues(alpha: 0.05),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Почему выбирают нас:",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text("• Современные самолёты 🛫"),
-                        Text("• Удобное онлайн-бронирование 📱"),
-                        Text("• Программа лояльности SkyBonus 💎"),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            const Column(
+              children: [
+                Text(
+                  'Flutter страница',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-
-     
+      
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.blueAccent,
         onPressed: () {
-          print("123");
+          print('работает');
         },
-        child: const Icon(Icons.search),
-      ),
-    );
-  }
 
-  Widget _destinationCard(String city, String imageUrl) {
-    return Expanded(
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 4),
-        height: 120,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          image: DecorationImage(
-            image: NetworkImage(imageUrl),
-            fit: BoxFit.cover,
-          ),
-        ),
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          padding: const EdgeInsets.all(6),
-          color: Colors.black.withValues(alpha: 0.5),
-          child: Text(
-            city,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        child: const Icon(Icons.add),
       ),
     );
   }
