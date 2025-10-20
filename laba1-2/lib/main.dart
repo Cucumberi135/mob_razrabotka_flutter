@@ -19,12 +19,11 @@ class ExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0D0D0D), // 🔹 Глубокий чёрный фон
+      backgroundColor: const Color(0xFF0D0D0D),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // 🔹 Row с фиолетовым акцентом
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -78,22 +77,19 @@ class ExamplePage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFE0B0FF), // светло-фиолетовый текст
+                    color: Color(0xFFE0B0FF),
                   ),
                 ),
                 SizedBox(height: 8),
-                
               ],
             ),
           ],
         ),
       ),
 
-      // 🔹 FloatingActionButton в фиолетовых тонах
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF6A0DAD),
         onPressed: () {
-         
           print('работает');
         },
         child: const Icon(Icons.add, color: Colors.white),
