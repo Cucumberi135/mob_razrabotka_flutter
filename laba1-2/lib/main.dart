@@ -20,73 +20,76 @@ class ExamplePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0D0D0D),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: SingleChildScrollView(
+        // 🔹 добавлено для прокрутки
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6A0DAD), // фиолетовый
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xFF6A0DAD).withValues(alpha: 0.5),
-                        blurRadius: 10,
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                ),
-
-                Expanded(
-                  child: Container(
-                    height: 80,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF9B30FF).withValues(alpha: 0.7),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Expanded Container',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF6A0DAD),
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(
+                              0xFF6A0DAD,
+                            ).withValues(alpha: 0.5),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                          ),
+                        ],
                       ),
                     ),
-                  ),
+                    Expanded(
+                      child: Container(
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF9B30FF).withValues(alpha: 0.7),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Expanded Container',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage(
+                        'assets/photo_2025-04-08_12-43-44.jpg',
+                      ),
+                    ),
+                  ],
                 ),
-
-                const CircleAvatar(
-                  radius: 40,
-                  backgroundImage: AssetImage(
-                    'assets/photo_2025-04-08_12-43-44.jpg',
-                  ),
+                const SizedBox(height: 20),
+                const Column(
+                  children: [
+                    Text(
+                      'Flutter страница',
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFE0B0FF),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                  ],
                 ),
               ],
             ),
-
-            const SizedBox(height: 20),
-
-            const Column(
-              children: [
-                Text(
-                  'Flutter страница',
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFFE0B0FF),
-                  ),
-                ),
-                SizedBox(height: 8),
-              ],
-            ),
-          ],
+          ),
         ),
       ),
-
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF6A0DAD),
         onPressed: () {
