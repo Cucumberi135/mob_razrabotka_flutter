@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
 
 class ExamplePage extends StatelessWidget {
   const ExamplePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF0D0D0D),
       body: SingleChildScrollView(
-        // 🔹 добавлено для прокрутки
         child: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 40.0),
@@ -90,12 +90,69 @@ class ExamplePage extends StatelessWidget {
           ),
         ),
       ),
+
+      // 🔹 FAB теперь открывает новую страницу
       floatingActionButton: FloatingActionButton(
         backgroundColor: const Color(0xFF6A0DAD),
         onPressed: () {
-          print('работает');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SecondPage()),
+          );
         },
-        child: const Icon(Icons.add, color: Colors.white),
+        child: const Icon(Icons.arrow_forward, color: Colors.white),
+      ),
+    );
+  }
+}
+
+// 🔸 Вторая страница
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF1A001A), // тёмно-фиолетовый
+      appBar: AppBar(
+        title: const Text("Вторая страница"),
+        backgroundColor: const Color(0xFF6A0DAD),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Ты на второй странице!',
+              style: TextStyle(
+                color: Color(0xFFE0B0FF),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton.icon(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF6A0DAD),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context); // 🔙 Вернуться назад
+              },
+              icon: const Icon(Icons.arrow_back, color: Colors.white),
+              label: const Text(
+                'Назад',
+                style: TextStyle(color: Colors.white, fontSize: 16),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
