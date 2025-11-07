@@ -12,8 +12,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-
     return Scaffold(
       appBar: AppBar(title: const Text('Регистрация')),
       body: Center(
@@ -62,7 +60,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         labelText: 'Пароль',
                         prefixIcon: const Icon(Icons.lock_outline_rounded),
                         suffixIcon: IconButton(
-                          icon: Icon(Icons.visibility_rounded),
+                          icon: Icon(_obscure
+                              ? Icons.visibility_rounded
+                              : Icons.visibility_off_rounded),
                           onPressed: () => setState(() => _obscure = !_obscure),
                         ),
                       ),
@@ -78,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('Войти'),
+                      child: const Text('Уже есть аккаунт? Войти'),
                     ),
                   ],
                 ),
