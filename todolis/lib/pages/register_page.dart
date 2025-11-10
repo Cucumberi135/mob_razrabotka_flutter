@@ -78,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const SizedBox(height: 16),
                     TextButton(
                       onPressed: () => Navigator.pop(context),
-                      child: const Text('Уже есть аккаунт? Войти'),
+                      child: const Text('Войти'),
                     ),
                   ],
                 ),

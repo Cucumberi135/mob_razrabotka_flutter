@@ -76,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
                       height: 48,
                       child: FilledButton(
                         onPressed: () {
-                          // 👉 переход на страницу todo_page
                           Navigator.pushReplacementNamed(context, '/todo');
                         },
                         child: const Text('Войти'),
